@@ -24,7 +24,6 @@ class Controller {
             taskDesp: joi_1.default.string().required(),
             assignedTo: joi_1.default.string().required().regex(/^[0-9a-fA-F]{24}$/),
         });
-        // Complete
         this.giveTask = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
@@ -63,7 +62,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.getAssignTo = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
@@ -98,7 +96,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.getAssignBy = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
@@ -123,7 +120,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.updateTaskAssignBy = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             try {
@@ -170,11 +166,6 @@ class Controller {
                 if (assignedTo) {
                     newtask.assignedTo = assignedTo;
                 }
-                // await TaskModel.findByIdAndUpdate(
-                //     taskData,
-                //     { $set: newtask },
-                //     { new: true }
-                // );
                 yield (0, task_1.updateTask)(new task_1.Task(Object.assign(Object.assign({}, task), req.body)));
                 res.status(200).json({
                     message: "Task updated successfully"
@@ -187,7 +178,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.updateTaskByUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const taskData = req.params.taskId;
@@ -230,11 +220,6 @@ class Controller {
                 if (requireTime) {
                     updateStatus.requireTime = requireTime;
                 }
-                // await TaskModel.findByIdAndUpdate(
-                //     taskData,
-                //     { $set: updateStatus },
-                //     { new: true }
-                // );
                 yield (0, task_1.updateTask)(new task_1.Task(Object.assign(Object.assign({}, task), req.body)));
                 res.status(200).json({
                     message: "Task updated successfully"
@@ -247,7 +232,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.deleteTask = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {

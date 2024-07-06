@@ -28,7 +28,6 @@ class Controller {
             permissions: joi_1.default.array().items(joi_1.default.string()).custom(this.uniquePermissions, 'unique permissions validation').default([]).required()
         });
         this.rolesArraySchema = joi_1.default.alternatives().try(this.RoleValidation, joi_1.default.array().items(this.RoleValidation));
-        // Complete
         this.addRole = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { error } = this.rolesArraySchema.validate(req.body);
@@ -60,7 +59,6 @@ class Controller {
                 });
             }
         });
-        // Only Update
         this.updateRole = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const reqID = req.params.roleId;
@@ -91,7 +89,6 @@ class Controller {
                 });
             }
         });
-        // Only Update
         this.RemovePermissions = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const roleID = req.params.roleId;
@@ -132,7 +129,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.deleteRole = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const roleId = req.params.roleId;
@@ -154,7 +150,6 @@ class Controller {
                 });
             }
         });
-        //Complete
         this.getRoles = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const roles = yield role_1.RoleModel.find();

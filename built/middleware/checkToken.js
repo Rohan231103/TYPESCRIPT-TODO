@@ -25,9 +25,7 @@ const checkToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         }
         const decode = jsonwebtoken_1.default.verify(authHeader, process.env.SECRET_KEY);
         req.tokenData = decode;
-        // const user: IUser | null= await userModel.findById(decode.userId);
         const user = yield user_1.UserModel.findById(req.tokenData.userId);
-        // console.log(user);
         if (!user) {
             return res.status(400).json({
                 message: 'User not found'

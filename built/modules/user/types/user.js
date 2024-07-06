@@ -5,7 +5,6 @@ const mongoose_1 = require("mongoose");
 const lodash_1 = require("lodash");
 class User {
     constructor(input) {
-        // console.log({input})
         this._id = input._id
             ? input._id.toString()
             : new mongoose_1.Types.ObjectId().toString();

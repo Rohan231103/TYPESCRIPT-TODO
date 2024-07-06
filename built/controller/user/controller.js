@@ -21,7 +21,6 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 const role_1 = require("../../modules/role");
 const user_1 = require("../../modules/user");
-//import { Request } from '../../request';
 class Controller {
     constructor() {
         this.adminLoginValidation = joi_1.default.object({
@@ -45,47 +44,49 @@ class Controller {
             password: joi_1.default.string().min(6),
             role: joi_1.default.string().alphanum()
         });
-        // protected readonly addSuperAdmin = async (req: Request, res: Response) => {
-        //     try {
-        //         let superAdminRole = await RoleModel.findOne({ roleName: 'Superadmin' });
-        //         if (!superAdminRole) {
-        //             superAdminRole = await RoleModel.create({
-        //                 roleName: 'Superadmin', permissions: [
-        //                     "add_emp",
-        //                     "get_emp",
-        //                     "update_emp",
-        //                     "delete_emp",
-        //                     "add_role",
-        //                     "update_role",
-        //                     "get_role",
-        //                     "delete_role",
-        //                     "remove_permission",
-        //                     "give_task",
-        //                     "update_task",
-        //                     "get_task",
-        //                     "delete_task"
-        //                 ]
-        //             });
-        //         }
-        //         let superAdmin = await UserModel.findOne({ email: 'superadmin@gmail.com' });
-        //         if (superAdmin) {
-        //             res.status(400).json({
-        //                 message: "Super Admin already exists"
-        //             });
-        //         } else {
-        //             const hashPassword = await bcrypt.hash('admin@123', 10);
-        //             superAdmin = await UserModel.create({ name: 'Super Admin', email: 'superadmin@gmail.com', password: hashPassword, role: superAdminRole._id });
-        //             console.log(superAdmin);
-        //         }
-        //         res.status(201).json({
-        //             message: "Super Admin added successfully"
-        //         });
-        //     } catch (error: any) {
-        //         res.status(500).json({
-        //             message: error.message
-        //         });
-        //     }
-        // }
+        this.addSuperAdmin = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                let superAdminRole = yield role_1.RoleModel.findOne({ roleName: 'Superadmin' });
+                if (!superAdminRole) {
+                    superAdminRole = yield role_1.RoleModel.create({
+                        roleName: 'Superadmin', permissions: [
+                            "add_emp",
+                            "get_emp",
+                            "update_emp",
+                            "delete_emp",
+                            "add_role",
+                            "update_role",
+                            "get_role",
+                            "delete_role",
+                            "remove_permission",
+                            "give_task",
+                            "update_task",
+                            "get_task",
+                            "delete_task"
+                        ]
+                    });
+                }
+                let superAdmin = yield user_1.UserModel.findOne({ email: 'superadmin@gmail.com' });
+                if (superAdmin) {
+                    res.status(400).json({
+                        message: "Super Admin already exists"
+                    });
+                }
+                else {
+                    const hashPassword = yield bcrypt_1.default.hash('admin@123', 10);
+                    superAdmin = yield user_1.UserModel.create({ name: 'Super Admin', email: 'superadmin@gmail.com', password: hashPassword, role: superAdminRole._id });
+                    console.log(superAdmin);
+                }
+                res.status(201).json({
+                    message: "Super Admin added successfully"
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    message: error.message
+                });
+            }
+        });
         this.login = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { error } = this.adminLoginValidation.validate(req.body);
@@ -128,7 +129,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.addUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { error } = this.userValidation.validate(req.body);
@@ -144,7 +144,6 @@ class Controller {
                         message: "Role not found"
                     });
                 }
-                // const emp: IUser = await UserModel.findOne({ email }) as IUser;
                 const user = yield (0, user_1.getUserByEmail)({ email });
                 if (user) {
                     return res.status(400).json({
@@ -171,7 +170,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.getUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             var _a;
             try {
@@ -202,7 +200,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.updateUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const { error, value } = this.userUpdateValidation.validate(req.body);
@@ -245,7 +242,6 @@ class Controller {
                     updateObj.email = req.body.email;
                 }
                 if (req.body.password) {
-                    // const password: string = req.body.password;
                     req.body.password = yield bcrypt_1.default.hash(req.body.password, 10);
                     updateObj.password = req.body.password;
                 }
@@ -298,7 +294,6 @@ class Controller {
                 });
             }
         });
-        // Complete
         this.deleteUser = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const UserId = req.params.userId;

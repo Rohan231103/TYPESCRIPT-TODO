@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateUser = void 0;
 const schema_1 = require("./schema");
 const updateUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    //console.log({user})
     yield schema_1.UserModel.findByIdAndUpdate(user._id, user.toJSON());
     return user;
 });

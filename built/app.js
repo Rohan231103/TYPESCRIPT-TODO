@@ -4,11 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-//import Role from "./controller/role";
 const user_1 = __importDefault(require("./controller/user"));
 const role_1 = __importDefault(require("./controller/role"));
 const task_1 = __importDefault(require("./controller/task"));
-//import Task from "./controller/task"
 const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 class App {
     static start(port) {

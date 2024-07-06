@@ -13,7 +13,7 @@ class Auth extends controller_1.default {
         this.initializeRoutes();
     }
     initializeRoutes() {
-        //this.router.post('/addSadmin', this.addSuperAdmin);
+        this.router.post('/addSadmin', this.addSuperAdmin);
         this.router.post('/login', this.login);
         this.router.post('/addUser', middleware_1.checkToken, (0, middleware_1.checkPermission)("add_emp"), this.addUser);
         this.router.get('/getUser', middleware_1.checkToken, (0, middleware_1.checkPermission)("get_emp"), this.getUser);
